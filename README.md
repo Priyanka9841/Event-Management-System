@@ -41,13 +41,16 @@ python app.py
 ## 📸 Screenshots
 
 ### 🔐 Login Page
-![Login Page](Screenshots/login_page.png)
+![Login Page](https://github.com/user-attachments/assets/356b86fb-4482-493d-a799-a976a1603c3d)
+ng)
 
 ### 📋 Participant Dashboard
-![Participant Dashboard](Screenshots/participant_dashboard.png)
+![participant_dashboard](https://github.com/user-attachments/assets/bef9b5ce-efd1-4691-8ce0-908e23c81ac0)
+icipant_dashboard.png)
 
 ### 📋 Organizer Dashboard
-![Participant Dashboard](Screenshots/organizer_dashboard.png)
+![organizer_dashboard](https://github.com/user-attachments/assets/788d018e-a119-406f-8536-39524e781d92)
+oard.png)
 
 📝 License
 This project is licensed under the MIT License.
