@@ -41,15 +41,15 @@ python app.py
 ## 📸 Screenshots
 
 ### 🔐 Login Page
-![login_page](https://github.com/user-attachments/assets/763852b1-7ece-4630-9e96-02e3f94b233d)
+![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/login_page.png)
 
 
 ### 📋 Participant Dashboard
-![participant_dashboard](https://github.com/user-attachments/assets/ebf56b96-0e60-45c3-b323-ce7c4fcab7cb)
+![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/participant_dashboard.png)
 
 
 ### 📋 Organizer Dashboard
-![organizer_dashboard](https://github.com/user-attachments/assets/53197908-c362-445d-a726-0c71a610135d)
+![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/organizer_dashboard.png)
 
 
 📝 License
