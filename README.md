@@ -37,19 +37,20 @@ git clone https://github.com/yourusername/event-management-app.git
 cd event-management-app
 pip install -r requirements.txt
 python app.py
+```
 
 ## 📸 Screenshots
 
 ### 🔐 Login Page
-![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/login_page.png)
+![image alt](myenv/Screenshots/login_page.png)
 
 
 ### 📋 Participant Dashboard
-![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/participant_dashboard.png)
+![image alt](myenv/Screenshots/participant_dashboard.png)
 
 
 ### 📋 Organizer Dashboard
-![image alt](https://github.com/Priyanka9841/Event-Management-System/blob/eed9aab8bfd0787d78f9ca25839adb6e5e4a0275/myenv/Screenshots/organizer_dashboard.png)
+![image alt](myenv/Screenshots/organizer_dashboard.png)
 
 
 📝 License
