@@ -1,0 +1,137 @@
+.feedback-bg {
+    background: url('../images/feedback1.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 2rem;
+    color: white;
+}
+
+.feedback-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.event-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.event-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.event-date {
+    color: #ddd;
+    font-size: 0.9rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.feedback-btn {
+    display: inline-block;
+    background: #6a11cb;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.feedback-btn:hover {
+    background: #4a0d8f;
+    transform: scale(1.05);
+}
+
+.no-feedback {
+    text-align: center;
+    padding: 2rem;
+    grid-column: 1 / -1;
+}
+
+.no-feedback i {
+    font-size: 3rem;
+    color: #6a11cb;
+    margin-bottom: 1rem;
+}
+
+.no-feedback p {
+    font-size: 1.2rem;
+    color: white;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #d4edda;
+}
+
+.alert-error {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #f8d7da;
+}
+
+.feedback-bg {
+    background: url('../images/feedback1.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    padding: 2rem;
+    color: white;
+}
+
+.feedback-container, .analysis-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.alert-success {
+    background: rgba(40, 167, 69, 0.2);
+    border: 1px solid #28a745;
+    color: #d4edda;
+}
+
+.alert-error {
+    background: rgba(220, 53, 69, 0.2);
+    border: 1px solid #dc3545;
+    color: #f8d7da;
+}

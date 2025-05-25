@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participant Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/participant_dashboard.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">Event Manager</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('dashboard') }}" class="{% if request.path == url_for('dashboard') %}active{% endif %}">Dashboard</a></li>
+                    <li><a href="{{ url_for('my_events') }}" class="{% if request.path == url_for('my_events') %}active{% endif %}">My Events</a></li>
+                    <li><a href="{{ url_for('participant_leaderboard') }}" class="{% if request.path == url_for('leaderboard') %}active{% endif %}">Leaderboard</a></li>
+                    <li><a href="{{ url_for('feedback') }}" class="{% if request.path == url_for('feedback') %}active{% endif %}">Feedback</a></li>
+                    <li><a href="{{ url_for('settings') }}" class="{% if request.path == url_for('settings') %}active{% endif %}">Settings</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>Welcome, Participant!</h1>
+                <p class="subtitle">Discover and register for exciting events</p>
+            </header>
+
+            <!-- Available Events -->
+            <section class="events-list">
+                <h2>Available Events</h2>
+                <div class="events-grid">
+                    {% if events %}
+                        {% for event in events %}
+                            <div class="event-card">
+                                <div class="event-header">
+                                    <h3>{{ event['event_name'] }}</h3>
+                                </div>
+                                <div class="event-body">
+                                    <p class="event-description">{{ event['description'] }}</p>
+                                    <div class="event-meta">
+                                        <p><i class="fas fa-calendar-alt"></i> {{ event['event_date'] }}</p>
+                                        <p><i class="fas fa-map-marker-alt"></i> {{ event['location'] }}</p>
+                                    </div>
+                                </div>
+                                <div class="event-footer">
+                                    {% if event.id in registered_event_ids %}
+                                        <button class="registered-btn" disabled>Already Registered</button>
+                                    {% else %}
+                                        <a href="{{ url_for('register_event', event_id=event.id) }}" class="register-btn">
+                                            Register Now <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-events">
+                            <i class="fas fa-calendar-times"></i>
+                            <p>No events available at the moment</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

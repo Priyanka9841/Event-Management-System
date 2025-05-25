@@ -1,0 +1,202 @@
+/* Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+/* Background */
+.background {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 100px);
+    background: linear-gradient(135deg, rgba(81, 45, 168, 0.9), rgba(126, 87, 194, 0.8)),
+                url('/static/images/background.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+/* Header */
+.header {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    flex-grow: 1;
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.site-name {
+    font-size: 2rem;
+}
+
+.slogan {
+    font-size: 1.2rem;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* Role Selection */
+.role-selection {
+    margin: 2rem 0;
+    display: flex;
+    gap: 1rem;
+}
+
+.role-btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(5px);
+}
+
+.role-btn.active, .role-btn:hover {
+    background: #6c5ce7;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Form Container */
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.form-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-toggle button {
+    flex: 1;
+    padding: 0.8rem;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-toggle button.active {
+    color: white;
+    border-bottom: 3px solid #6c5ce7;
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: opacity 0.3s ease-in-out;
+}
+
+input {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+}
+
+button[type="submit"] {
+    padding: 1rem;
+    background: #6c5ce7;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #5b4bc4;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+}
+
+/* Flash Message */
+.flash-messages {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.flash-message {
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: white;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+.flash-message.success {
+    background: rgba(0, 128, 0, 0.8);
+}
+
+.flash-message.error {
+    background: rgba(255, 0, 0, 0.8);
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}

@@ -1,0 +1,98 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url("../images/settings.png.png");
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+header h1 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.settings-form {
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.settings-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.settings-form label {
+    font-size: 18px;
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.settings-form input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #efb1f3;
+    color: #000;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: #efb1f3;
+}
+
+.return-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background: #efb1f3;
+    color: #000;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    margin-top: 20px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.return-btn:hover {
+    background: #efb1f3;
+}
+
+.flash-message {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}

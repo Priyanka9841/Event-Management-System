@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register_event.css') }}">
+</head>
+<body>
+    <div class="registration-container">
+        <h2>Event Registration Form</h2>
+        
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('register_event', event_id=event_id) }}">
+            <div class="form-group">
+                <label for="full_name">Full Name:</label>
+                <input type="text" id="full_name" name="full_name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <select name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required>
+            </div>
+
+            <div class="form-group">
+                <label for="college">College Name:</label>
+                <input type="text" id="college" name="college" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email ID:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Complete Registration</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* === BODY with background overlay and flex centering === */
+body.form-bg {
+  margin: 0;
+  padding: 20px; /* padding for small spacing */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('../images/feedback.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* === FORM CONTAINER with max-height and scroll === */
+.form-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+
+  max-height: 90vh; /* max height relative to viewport */
+  overflow-y: auto; /* enable vertical scroll if needed */
+}
+
+/* === FORM HEADER === */
+.form-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-header h1 {
+  font-size: 28px;
+  color: #333;
+}
+
+/* === EVENT METADATA === */
+.event-meta span {
+  display: inline-block;
+  margin: 5px 10px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* === FORM SECTIONS === */
+.form-section h2 {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+/* === RATING GRID === */
+.rating-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+/* Hide radio inputs */
+.rating-option input {
+  display: none;
+}
+
+/* Rating card style */
+.rating-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #ddd;
+  user-select: none;
+}
+
+/* Selected rating style */
+.rating-option input:checked + .rating-card {
+  border-color: #6a11cb;
+  background: #f8f0ff;
+  transform: scale(1.05);
+}
+
+.rating-number {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+  color: #6a11cb;
+}
+
+.rating-label {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  min-height: 100px;
+  margin-top: 10px;
+  font-family: inherit;
+}
+
+/* Submit button */
+.submit-btn {
+  display: block;
+  width: 100%;
+  background-color: #6a11cb;
+  color: white;
+  font-size: 16px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+}
+
+.submit-btn:hover {
+  background-color: #4e0ec2;
+}
+
+/* Alerts */
+.alert {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.alert-success {
+  background-color: #28a745;
+}
+
+.alert-error {
+  background-color: #dc3545;
+}

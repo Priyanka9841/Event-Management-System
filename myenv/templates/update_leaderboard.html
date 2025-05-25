@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Leaderboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/organizer_dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+
+        body {
+            background-image: url('/static/images/leaderboard1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .update-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-size: 24px;
+            border-bottom: 2px solid #6a11cb;
+            padding-bottom: 10px;
+        }
+        
+        .winner-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .winner-box {
+            text-align: center;
+            padding: 25px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .winner-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .winner-box h3 {
+            margin: 0 0 15px 0;
+            color: #2c3e50;
+            font-size: 20px;
+        }
+        
+        .winner-box.gold {
+            border: 3px solid #FFD700;
+            background: linear-gradient(45deg, #fff3cd, #ffffff);
+        }
+        
+        .winner-box.silver {
+            border: 3px solid #C0C0C0;
+            background: linear-gradient(45deg, #e9ecef, #ffffff);
+        }
+        
+        .winner-box.bronze {
+            border: 3px solid #CD7F32;
+            background: linear-gradient(45deg, #f8f9fa, #ffffff);
+        }
+        
+        .winner-box input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .winner-box input:focus {
+            border-color: #6a11cb;
+            outline: none;
+            box-shadow: 0 0 8px rgba(106, 17, 203, 0.2);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #5a0cb3 0%, #1a65e6 100%);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 25px;
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: #4a0d8f;
+        }
+        
+        .back-link i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Include your sidebar -->
+        
+        <div class="main-content">
+            <div class="update-container">
+                <h2 class="form-title">Update Leaderboard for {{ event.event_name }}</h2>
+                <!-- Keep all the existing HTML the same until the form -->
+            <form method="POST" action="{{ url_for('update_leaderboard', event_id=event.id) }}">
+                <!-- Remove the CSRF token input -->
+                
+                <div class="winner-boxes">
+                    <div class="winner-box gold">
+                        <h3>🥇 1st Place</h3>
+                        <input type="text" name="first_place" 
+                            value="{{ leaderboard.first_place if leaderboard else '' }}" 
+                            placeholder="Winner's name"
+                            required>
+                    </div>
+                    
+                    <div class="winner-box silver">
+                        <h3>🥈 2nd Place</h3>
+                        <input type="text" name="second_place" 
+                            value="{{ leaderboard.second_place if leaderboard else '' }}" 
+                            placeholder="Runner-up's name"
+                            required>
+                    </div>
+                    
+                    <div class="winner-box bronze">
+                        <h3>🥉 3rd Place</h3>
+                        <input type="text" name="third_place" 
+                            value="{{ leaderboard.third_place if leaderboard else '' }}" 
+                            placeholder="Third place"
+                            required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-trophy"></i> Update Leaderboard
+                </button>
+            </form>
+
+                
+                
+                <a href="{{ url_for('leaderboard') }}" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Leaderboards
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

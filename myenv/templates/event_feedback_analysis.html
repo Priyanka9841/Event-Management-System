@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Feedback Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .analysis-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .event-header {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-header h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .event-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .event-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color:black
+        }
+        
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .chart-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        
+        .chart-container {
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background: #6a11cb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+        }
+        
+        .back-btn:hover {
+            background: #5a0cb3;
+        }
+        
+        .feedback-comments {
+            margin-top: 30px;
+        }
+        
+        .comment-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .comment-user {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .comment-date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .comment-text {
+            color: #34495e;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="feedback-bg">
+    <div class="analysis-container">
+        <a href="{{ url_for('feedback_analysis') }}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Analysis
+        </a>
+        
+        <div class="event-header">
+            <h2>{{ event.event_name }}</h2>
+            <div class="event-meta">
+                <span><i class="fas fa-calendar-alt"></i> {{ event.event_date.strftime('%B %d, %Y') }}</span>
+                <span><i class="fas fa-map-marker-alt"></i> {{ event.location }}</span>
+                <span><i class="fas fa-comments"></i> {{ feedbacks|length }} feedbacks</span>
+            </div>
+        </div>
+        
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>Average Ratings</h3>
+                <div class="chart-container">
+                    <canvas id="avgRatingsChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <h3>Rating Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="ratingDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        {% if feedbacks %}
+        <div class="feedback-comments">
+            <h3><i class="fas fa-comment-dots"></i> Participant Comments</h3>
+            {% for feedback in feedbacks %}
+            <div class="comment-card">
+                <div class="comment-header">
+                    <span class="comment-user">{{ feedback.username }}</span>
+                    <span class="comment-date">{{ feedback.submission_date.strftime('%B %d, %Y') }}</span>
+                </div>
+                <div class="comment-text">
+                    {{ feedback.comments if feedback.comments else "No comments provided" }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+<script>
+    // Get the averages data safely from Jinja template
+    const averagesData = JSON.parse('{{ averages | default({}) | tojson | safe }}');
+    
+    // Set default values if some keys are missing
+    const venueAvg = averagesData.venue || 0;
+    const coordinatorsAvg = averagesData.coordinators || 0;
+    const timeAvg = averagesData.time || 0;
+    const helpfulnessAvg = averagesData.helpfulness || 0;
+
+    // Average Ratings Chart (Bar)
+    const avgCtx = document.getElementById('avgRatingsChart').getContext('2d');
+    const avgRatingsChart = new Chart(avgCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Venue', 'Coordinators', 'Time Management', 'Helpfulness'],
+            datasets: [{
+                label: 'Average Rating',
+                data: [venueAvg, coordinatorsAvg, timeAvg, helpfulnessAvg],
+                backgroundColor: [
+                    'rgba(106, 17, 203, 0.7)',
+                    'rgba(37, 117, 252, 0.7)',
+                    'rgba(40, 167, 69, 0.7)',
+                    'rgba(220, 53, 69, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(106, 17, 203, 1)',
+                    'rgba(37, 117, 252, 1)',
+                    'rgba(40, 167, 69, 1)',
+                    'rgba(220, 53, 69, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 5,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+
+    // Rating Distribution Chart (Radar)
+    const distCtx = document.getElementById('ratingDistributionChart').getContext('2d');
+    const ratingDistributionChart = new Chart(distCtx, {
+        type: 'radar',
+        data: {
+            labels: ['Venue', 'Coordinators', 'Time Management', 'Helpfulness'],
+            datasets: [{
+                label: 'Average Ratings',
+                data: [venueAvg, coordinatorsAvg, timeAvg, helpfulnessAvg],
+                backgroundColor: 'rgba(106, 17, 203, 0.2)',
+                borderColor: 'rgba(106, 17, 203, 1)',
+                pointBackgroundColor: 'rgba(106, 17, 203, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(106, 17, 203, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: true
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 5,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

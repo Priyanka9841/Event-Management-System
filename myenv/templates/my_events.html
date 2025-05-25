@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events - {{ username }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/participant_dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .registered-events {
+            margin-top: 30px;
+        }
+        .events-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .events-table th {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        .events-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .events-table tr:last-child td {
+            border-bottom: none;
+        }
+        .events-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .no-events {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        .no-events i {
+            font-size: 50px;
+            color: #bdc3c7;
+            margin-bottom: 15px;
+        }
+        .no-events p {
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+        .event-date {
+            color: #6a11cb;
+            font-weight: 500;
+        }
+        .event-location {
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">Event Manager</div>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('dashboard') }}" class="{% if request.path == url_for('dashboard') %}active{% endif %}">
+                        <i class="fas fa-home"></i> Dashboard
+                    </a></li>
+                    <li><a href="{{ url_for('my_events') }}" class="{% if request.path == url_for('my_events') %}active{% endif %}">
+                        <i class="fas fa-calendar-check"></i> My Events
+                    </a></li>
+                    <li><a href="{{ url_for('leaderboard') }}" class="{% if request.path == url_for('leaderboard') %}active{% endif %}">
+                        <i class="fas fa-trophy"></i> Leaderboard
+                    </a></li>
+                    <li><a href="{{ url_for('feedback') }}" class="{% if request.path == url_for('feedback') %}active{% endif %}">
+                        <i class="fas fa-comment-alt"></i> Feedback
+                    </a></li>
+                    <li><a href="{{ url_for('settings') }}" class="{% if request.path == url_for('settings') %}active{% endif %}">
+                        <i class="fas fa-cog"></i> Settings
+                    </a></li>
+                    <li><a href="{{ url_for('logout') }}" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>My Registered Events</h1>
+                <p class="subtitle">View all events you've registered for</p>
+            </header>
+
+            <!-- Registered Events -->
+            <section class="registered-events">
+                {% if registrations %}
+                    <table class="events-table">
+                        <thead>
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for event in registrations %}
+                                <tr>
+                                    <td>{{ event.event_name }}</td>
+                                    <td class="event-date">
+                                        <i class="fas fa-calendar-day"></i> {{ event.event_date }}
+                                    </td>
+                                    <td class="event-location">
+                                        <i class="fas fa-map-marker-alt"></i> {{ event.location }}
+                                    </td>
+                                    <td>{{ event.description }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="no-events">
+                        <i class="fas fa-calendar-times"></i>
+                        <p>You haven't registered for any events yet.</p>
+                        <a href="{{ url_for('dashboard') }}" class="btn-primary">
+                            Browse Events <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                {% endif %}
+            </section>
+        </main>
+    </div>
+</body>
+</html>

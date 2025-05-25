@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CampusConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo">
+            <div class="text-container">
+                <h1 class="site-name">CampusConnect</h1>
+                <p class="slogan">Seamlessly connecting students, events, and opportunities!</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="background"></div>
+
+    <div class="container">
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="role-selection">
+            <button id="participantBtn" class="role-btn active">Participant</button>
+            <button id="organizerBtn" class="role-btn">Organizer</button>
+        </div>
+
+        <div class="form-container">
+            <div class="form-toggle">
+                <button id="loginBtn" class="active">Login</button>
+                <button id="registerBtn">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="hidden" name="role" id="loginRole">
+                <button type="submit">Login</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" method="POST" action="{{ url_for('register') }}" style="display: none;">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="hidden" name="role" id="registerRole">
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Role Management
+        let currentRole = 'participant';
+        const roleButtons = {
+            participant: document.getElementById('participantBtn'),
+            organizer: document.getElementById('organizerBtn')
+        };
+
+        // Form Elements
+        const forms = {
+            login: document.getElementById('loginForm'),
+            register: document.getElementById('registerForm'),
+            loginBtn: document.getElementById('loginBtn'),
+            registerBtn: document.getElementById('registerBtn')
+        };
+
+        // Role Selection Handlers
+        function setActiveRole(role) {
+            currentRole = role;
+            Object.values(roleButtons).forEach(btn => btn.classList.remove('active'));
+            roleButtons[role].classList.add('active');
+            document.getElementById('loginRole').value = role;
+            document.getElementById('registerRole').value = role;
+        }
+
+        // Form Toggle Handlers
+        function showForm(formType) {
+            forms.login.style.display = formType === 'login' ? 'block' : 'none';
+            forms.register.style.display = formType === 'register' ? 'block' : 'none';
+            forms.loginBtn.classList.toggle('active', formType === 'login');
+            forms.registerBtn.classList.toggle('active', formType === 'register');
+        }
+
+        // Event Listeners
+        roleButtons.participant.addEventListener('click', () => setActiveRole('participant'));
+        roleButtons.organizer.addEventListener('click', () => setActiveRole('organizer'));
+        forms.loginBtn.addEventListener('click', () => showForm('login'));
+        forms.registerBtn.addEventListener('click', () => showForm('register'));
+
+        // Initialize role values
+        document.getElementById('loginRole').value = currentRole;
+        document.getElementById('registerRole').value = currentRole;
+    </script>
+</body>
+</html>

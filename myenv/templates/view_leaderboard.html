@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboard - {{ event.event_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/participant_dashboard.css') }}">
+    <style>
+
+        body {
+            background-image: url('{{ url_for("static", filename="images/leaderboard1.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .leaderboard-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .event-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .winner-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .winner-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .winner-item.gold {
+            border-left: 5px solid #FFD700;
+        }
+        
+        .winner-item.silver {
+            border-left: 5px solid #C0C0C0;
+        }
+        
+        .winner-item.bronze {
+            border-left: 5px solid #CD7F32;
+        }
+        
+        .winner-position {
+            font-size: 24px;
+            font-weight: bold;
+            width: 50px;
+            text-align: center;
+        }
+        
+        .winner-name {
+            font-size: 18px;
+            flex-grow: 1;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #6a11cb;
+            text-decoration: none;
+        }
+        
+        .no-winners {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Include your sidebar -->
+        
+        <div class="main-content">
+            <div class="leaderboard-container">
+                <h2 class="event-title">{{ event.event_name }} Leaderboard</h2>
+                
+                {% if leaderboard and (leaderboard.first_place or leaderboard.second_place or leaderboard.third_place) %}
+                <ul class="winner-list">
+                    {% if leaderboard.first_place %}
+                    <li class="winner-item gold">
+                        <span class="winner-position">1</span>
+                        <span class="winner-name">{{ leaderboard.first_place }}</span>
+                        <span class="winner-medal">🥇</span>
+                    </li>
+                    {% endif %}
+                    
+                    {% if leaderboard.second_place %}
+                    <li class="winner-item silver">
+                        <span class="winner-position">2</span>
+                        <span class="winner-name">{{ leaderboard.second_place }}</span>
+                        <span class="winner-medal">🥈</span>
+                    </li>
+                    {% endif %}
+                    
+                    {% if leaderboard.third_place %}
+                    <li class="winner-item bronze">
+                        <span class="winner-position">3</span>
+                        <span class="winner-name">{{ leaderboard.third_place }}</span>
+                        <span class="winner-medal">🥉</span>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% else %}
+                <div class="no-winners">
+                    <i class="fas fa-trophy" style="font-size: 40px;"></i>
+                    <p>No winners announced yet</p>
+                </div>
+                {% endif %}
+                
+                <a href="{{ url_for('participant_leaderboard') }}" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Events
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
